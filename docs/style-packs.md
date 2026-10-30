@@ -10,7 +10,10 @@ Open Settings → Appearance studio. Choose an interface and a clock independent
 | Terminal | Green phosphor palette, square panels, monospace type |
 | Lunar | Violet highlights, rounded instruments, soft surfaces |
 
-Clocks: Signal (digital), Split (split tiles), Orbit (analog). All use the same
+Clocks: Signal (digital), Split (split tiles), Orbit (analog), Telegraph (Morse).
+Telegraph keeps a readable HH:MM clock above four groups of Morse numerals,
+one group per digit, including leading zeros. It is silent and does not flash.
+All use the same
 Taipei time source as the dashboard. Reduced-motion preferences are respected.
 
 ## Import and share
@@ -45,7 +48,7 @@ clears the library and restores the default interface.
 ```
 
 Maximum size: 16 KB. Layout must be `glass`, `terminal`, or `lunar`; clock must be
-`digital`, `flip`, or `analog`. Name/author are plain text up to 60 characters.
+`digital`, `flip`, `analog`, or `morse`. Name/author are plain text up to 60 characters.
 All five colors are required six-digit hex values. Text, muted text and accent
 must each have at least 4.5:1 contrast against both background and surface.
 Unknown fields are rejected.
