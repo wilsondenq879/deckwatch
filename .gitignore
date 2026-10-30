@@ -1,0 +1,14 @@
+.runtime/
+config/agents.json
+__pycache__/
+*.py[cod]
+dist/
+design/*.png
+design/*.jpg
+design/approved-v3/
+preview*.png
+preview*.jpg
+desktop/**/__pycache__/
+desktop/download-install.sh
+desktop/QA-v030.md
+design-qa.md
