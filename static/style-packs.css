@@ -49,3 +49,18 @@ html[data-clock="analog"] .clock-display{margin:8px 0;align-items:center;gap:12p
 html[data-clock="analog"] .clock-panel{padding-top:10px}
 @media(max-width:550px){.style-studio{padding:16px}.style-grid{grid-template-columns:1fr}.style-card,.clock-card{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:center}.style-card small{grid-column:2}.theme-sample{grid-row:span 2}.theme-time{font-size:24px}.theme-lines{display:none}.face-sample{font-size:28px}.style-dialog .style-card{display:flex}html[data-clock="flip"] .live-tiles{font-size:48px}}
 @media(prefers-reduced-motion:reduce){.split-digit{animation:none!important;transition:none!important}}
+
+/* All faces share one stage, so the heading, date and metrics never jump. */
+html[data-clock] .clock-panel{container-type:inline-size;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:12px;padding:12px 8px;min-height:0}
+html[data-clock] .clock-heading{padding-bottom:12px}
+html[data-clock] .clock-display{display:grid;grid-template-columns:auto auto;grid-template-rows:auto;justify-content:center;align-content:center;align-items:center;gap:12px;margin:0;min-height:210px;letter-spacing:-3px;font-size:clamp(64px,21cqw,112px)}
+html[data-clock] #clock,html[data-clock] .live-tiles,html[data-clock] .live-dial{grid-column:1;grid-row:1}
+html[data-clock] #clockSeconds{grid-column:2;grid-row:1;align-self:center;font-size:26px;width:2ch;text-align:left;line-height:1;font-variant-numeric:tabular-nums}
+html[data-clock="flip"] .live-tiles{font-size:clamp(40px,15cqw,78px);gap:4px;letter-spacing:-1px;white-space:nowrap}
+html[data-clock="analog"] .live-dial{width:180px;height:180px}
+html[data-clock="morse"] .live-morse{grid-column:1/-1;grid-row:2;gap:10px;width:100%}
+html[data-clock="morse"] .clock-display{font-size:clamp(60px,19cqw,100px)}
+html[data-clock] .clock-calendar{font-size:21px;gap:16px;white-space:nowrap}
+@media(min-width:900px) and (min-height:680px){html[data-clock] .clock-display{min-height:0}}
+@media(max-width:1100px) and (min-width:900px){.brand-subtitle{display:none}#dashboard .section-top h2{font-size:19px}#dashboard .metric{padding:0 5px}#dashboard .metric strong{font-size:16px}#dashboard .metric .pressure,#dashboard .metric .metric-caption{font-size:10px}}
+@media(max-width:550px){html[data-clock] .clock-calendar{font-size:19px;gap:10px}.style-card,.clock-card{column-gap:12px}}
