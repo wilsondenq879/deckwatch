@@ -57,7 +57,7 @@ else {
     if (process.argv.includes('--diagnostics')) setTimeout(async()=>{
       try {
         const report=await contents.executeJavaScript(`(() => ({
-          version: '0.5.0', viewport: [innerWidth,innerHeight],
+          version: '0.5.1', viewport: [innerWidth,innerHeight],
           clockFace: document.documentElement.dataset.clock,
           morseGroups: document.querySelectorAll('.live-morse .morse-code').length,
           morseSymbols: [...document.querySelectorAll('.live-morse .morse-code')].map(n=>n.dataset.code),
@@ -70,7 +70,11 @@ else {
           cpu: document.getElementById('cpuValue').textContent,
           ram: document.getElementById('ramValue').textContent,
           pressure: document.getElementById('memoryPressure').textContent,
-          overflow: document.documentElement.scrollWidth > innerWidth
+          overflow: document.documentElement.scrollWidth > innerWidth,
+          verticalOverflow: document.documentElement.scrollHeight > innerHeight,
+          quotaVisible: document.getElementById('usagePanel').getBoundingClientRect().bottom <= innerHeight,
+          tasksOverlapQuota: document.querySelector('.tasks-panel').getBoundingClientRect().bottom > document.getElementById('usagePanel').getBoundingClientRect().top,
+          calendarOverlapsMetrics: document.querySelector('.clock-calendar').getBoundingClientRect().bottom > document.querySelector('.host-metrics').getBoundingClientRect().top
         }))()`);
         await fs.writeFile(path.join(app.getPath('userData'),'diagnostics.json'),JSON.stringify(report),{mode:0o600});
         await fs.writeFile(path.join(app.getPath('userData'),'diagnostics.png'),(await contents.capturePage()).toPNG(),{mode:0o600});
