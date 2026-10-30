@@ -57,7 +57,12 @@ else {
     if (process.argv.includes('--diagnostics')) setTimeout(async()=>{
       try {
         const report=await contents.executeJavaScript(`(() => ({
-          version: '0.4.0', viewport: [innerWidth,innerHeight],
+          version: '0.5.0', viewport: [innerWidth,innerHeight],
+          clockFace: document.documentElement.dataset.clock,
+          morseGroups: document.querySelectorAll('.live-morse .morse-code').length,
+          morseSymbols: [...document.querySelectorAll('.live-morse .morse-code')].map(n=>n.dataset.code),
+          clockTime: document.getElementById('clock').textContent,
+          appearanceReady: !!document.getElementById('styleStudio'),
           dashboardVisible: !document.getElementById('dashboard').hidden,
           settingsHidden: document.getElementById('settingsPage').hidden,
           taskRows: document.querySelectorAll('#taskList .task-row').length,
