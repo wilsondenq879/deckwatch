@@ -11,7 +11,7 @@ _Demo data only — no real hosts, tasks, usage, or credentials are shown._
 ## Make it yours
 
 Settings → **Appearance studio** includes three interfaces (Obsidian, Terminal,
-Lunar) and three independent clocks (Signal digital, Split flip tiles, Orbit analog).
+Lunar) and four independent clocks (Signal digital, Split flip tiles, Orbit analog, Telegraph Morse).
 Preview and import community JSON packs, export your current combination, and
 keep up to 12 custom styles on your device. See the [style pack guide](docs/style-packs.md)
 and [Amber Terminal example](themes/amber-terminal.json).
