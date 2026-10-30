@@ -14,6 +14,18 @@ html[data-skin="lunar"] body{background:radial-gradient(ellipse at 75% 15%,color
 html[data-skin="lunar"] .brand{letter-spacing:5px;font-weight:450}
 .style-studio{padding:24px;margin-bottom:20px}.style-studio h2{font-size:24px;margin:0 0 6px}.style-studio h3{font-size:15px;letter-spacing:.06em;margin:24px 0 12px;color:var(--muted)}
 .style-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.style-grid:has(.clock-card){grid-template-columns:repeat(4,minmax(0,1fr))}
+.morse-preview{white-space:pre;font:20px/1.7 ui-monospace,monospace;letter-spacing:3px;color:var(--cyan)}
+.live-morse{display:none}
+html[data-clock="morse"] .clock-display{flex-wrap:wrap;row-gap:16px}
+html[data-clock="morse"] .live-morse{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;flex-basis:100%;letter-spacing:0}
+.morse-cell{padding:12px 6px 7px;border-top:1px solid var(--cyan);background:linear-gradient(color-mix(in srgb,var(--cyan) 9%,transparent),transparent);border-radius:3px;min-width:0}
+.morse-cell:nth-child(3){border-left:1px solid var(--line)}
+.morse-code{height:14px;display:flex;align-items:center;justify-content:center;gap:4px}
+.morse-code i{display:block;height:6px;min-width:4px;flex:1;max-width:6px;background:var(--cyan);border-radius:8px;box-shadow:0 0 8px color-mix(in srgb,var(--cyan) 30%,transparent)}
+.morse-code .morse-dash{flex:3;max-width:18px}
+.morse-digit{display:block;margin-top:8px;color:var(--muted);font:12px/1 ui-monospace,monospace;text-align:center}
+@media(max-width:550px){.style-grid:has(.clock-card){grid-template-columns:1fr}.morse-preview{font-size:16px;letter-spacing:1px}}
 .style-card,.clock-card{display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:10px;padding:14px;min-width:0;border:1px solid var(--line);border-radius:14px}
 .style-card strong,.clock-card strong{font-size:15px;overflow-wrap:anywhere}.style-card small{color:var(--muted);font-size:12px;overflow-wrap:anywhere}
 .style-card[aria-pressed=true],.clock-card[aria-pressed=true]{outline:2px solid var(--cyan);outline-offset:-2px}
