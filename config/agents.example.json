@@ -1,0 +1,23 @@
+{
+  "host": {
+    "id": "windows-workstation",
+    "label": "Windows Workstation"
+  },
+  "agents": {
+    "codex": { "enabled": true },
+    "claude": { "enabled": true },
+    "hermes": {
+      "enabled": true,
+      "statusUrl": "http://127.0.0.1:9119/api/status"
+    },
+    "openclaw": { "enabled": true }
+  },
+  "nodes": [
+    {
+      "id": "windows-workstation",
+      "label": "Windows Workstation",
+      "endpoint": "http://192.168.50.200:8765",
+      "keyEnv": "DECK_WATCH_WINDOWS_NODE_KEY"
+    }
+  ]
+}
