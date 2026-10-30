@@ -15,6 +15,8 @@ else {
   app.whenReady().then(async()=>{
     bridge = new Bridge(app.getPath('userData'));
     const types={'/':'text/html','/index.html':'text/html','/app.js':'text/javascript','/desktop.js':'text/javascript','/app.css':'text/css','/desktop.css':'text/css','/favicon.svg':'image/svg+xml','/logo.png':'image/png'};
+    types['/style-packs.js']='text/javascript';
+    types['/style-packs.css']='text/css';
     protocol.handle('deck',async request=>{
       const url=new URL(request.url);
       if(url.host!=='watch' || !(url.pathname in types)) return new Response('Not found',{status:404});
