@@ -1,0 +1,106 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050709"><title>Deck Watch</title><link rel="icon" href="/logo.png"><link rel="stylesheet" href="/app.css"><script src="/app.js" defer></script></head><body>
+<main class="shell"><header class="topbar glass"><button id="backSettings" class="back-button" hidden data-label="back"><svg aria-hidden="true"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.65"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg></button><h1 id="settingsTitle" hidden data-i18n="settings">設定</h1><div class="brand"><img src="/logo.png" alt="" width="48" height="48"><span>DECK WATCH</span></div><span class="brand-subtitle" data-i18n="subtitle">Codex 使用監控</span><div class="toolbar"><span id="connection" class="connection" role="status">連線中</span><button id="settingsButton" class="icon-button" data-label="settings"><svg aria-hidden="true"
+  class="lucide lucide-settings"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.65"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+  <circle cx="12" cy="12" r="3" />
+</svg></button></div></header>
+<section id="pairing" class="pairing glass"><img src="/logo.png" width="64" height="64" alt=""><h1 data-i18n="pairTitle">連接你的 Mac</h1><p class="muted" data-i18n="pairHint">輸入 8 位配對碼。</p><form id="pairForm"><label for="pairCode" data-i18n="pairCode">配對碼</label><div class="pair-input"><input id="pairCode" type="password" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{8}" minlength="8" maxlength="8" required><button type="submit" id="pairSubmit" data-i18n="connect">連接</button></div><p id="pairError" class="error" role="alert"></p></form></section>
+<section id="settingsPage" hidden aria-labelledby="settingsTitle"><div class="settings-row glass"><label data-i18n="language">語言</label><div class="segments" aria-label="Language"><button data-lang="zh-Hant" lang="zh-Hant">繁體中文</button><button data-lang="en" lang="en">English</button></div></div><div class="settings-row glass"><div><label data-i18n="frequency">更新頻率</label><p class="setting-hint" data-i18n="sharedFrequency">套用至此 Mac 的所有看板</p></div><div class="segments" id="frequencyOptions"><button data-interval="30" data-i18n="sec30">30 秒</button><button data-interval="60" data-i18n="min1">1 分鐘</button><button data-interval="300" data-i18n="min5">5 分鐘</button></div></div><div class="settings-row glass"><div><label data-i18n="recentTasks">近期任務</label><p class="setting-hint" data-i18n="taskHint">預設 6 筆 · 最多 8 筆</p></div><div class="stepper"><button id="fewerTasks" data-label="fewer">−</button><output id="taskLimit" aria-live="polite">6</output><button id="moreTasks" data-label="more">＋</button></div></div><div class="settings-row glass"><label for="keepAwake" data-i18n="awake">保持螢幕亮著</label><input id="keepAwake" class="switch" type="checkbox" role="switch"></div><p id="settingsStatus" class="setting-status" role="status"></p><div class="settings-footer"><button id="infoButton" data-i18n="info">看板資訊</button><button id="fullscreen" data-i18n="fullscreen">全螢幕</button><button id="quitApp" hidden data-i18n="quit">結束 App</button></div><div id="desktopConnectionSlot"></div></section>
+<div id="dashboard" hidden><div id="notice" class="notice" role="status" hidden></div><div class="workspace"><nav class="sidebar" aria-label="Navigation"><button id="overviewButton" class="nav-button selected" data-label="overview"><svg aria-hidden="true"
+  class="lucide lucide-chart-pie"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.65"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z" />
+  <path d="M21.21 15.89A10 10 0 1 1 8 2.83" />
+</svg></button><button id="tasksButton" class="nav-button violet" data-label="history"><svg aria-hidden="true"
+  class="lucide lucide-file-text"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.65"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+  <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+  <path d="M10 9H8" />
+  <path d="M16 13H8" />
+  <path d="M16 17H8" />
+</svg></button></nav><div class="console-grid"><div class="left-column"><section class="clock-panel" aria-labelledby="clockHeading"><div class="clock-heading"><h1 id="clockHeading" data-i18n="taipei">台北時間</h1><span>UTC +08</span></div><div class="clock-display"><time id="clock">—</time><span id="clockSeconds" aria-hidden="true">00</span></div><div class="clock-calendar"><time id="today"></time><span id="weekday"></span></div></section><section class="host-metrics glass" data-label="hostMetrics"><div class="metric"><span>CPU</span><strong id="cpuValue">—</strong><canvas id="cpuChart" width="240" height="44" data-label="cpuTrend"></canvas></div><div class="metric"><span>RAM</span><strong id="ramValue">—</strong><span id="memoryPressure" class="pressure">—</span></div><div class="metric sync"><span data-i18n="sync">同步</span><strong id="syncAge">—</strong><span id="metricFreshness" class="metric-caption">—</span></div></section></div><div class="right-stack"><section id="fleetPanel" class="fleet-panel glass" aria-labelledby="fleetTitle"><div class="section-top"><h2 id="fleetTitle" data-i18n="agentFleet">Agent Fleet</h2><span id="fleetSummary" class="fleet-summary">—</span></div><div id="fleetList" class="fleet-list" aria-live="polite"></div></section><section class="tasks-panel glass" aria-labelledby="tasksHeading"><div class="section-top"><h2 id="tasksHeading" data-i18n="recentTasks">近期任務</h2><button id="showMore" class="more-button"><span id="visibleCount">6</span><svg aria-hidden="true"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.65"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg></button></div><ol id="taskList" class="task-list"></ol></section></div></div><section id="usagePanel" class="usage-panel glass" aria-labelledby="usageTitle"><div class="section-top"><h2 id="usageTitle">Codex 額度</h2><span id="usedLabel">—</span><span id="quotaCondition" class="quota-condition"></span><strong id="remaining">—</strong></div><div id="usageTrack" class="usage-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-label="usage"><div class="usage-fill"></div></div><div class="usage-dates"><time id="resetDate">—</time><span id="resetCountdown">—</span></div></section></div>
+<dialog id="infoDialog"><div class="section-top"><h2 data-i18n="info">看板資訊</h2><button id="closeInfo" class="icon-button" data-label="close"><svg aria-hidden="true"
+  class="lucide lucide-x"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.65"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M18 6 6 18" />
+  <path d="m6 6 12 12" />
+</svg></button></div><p id="sourceStatus"></p><p id="pollInterval"></p><p id="quotaUpdated"></p><p id="threadsUpdated"></p><div id="extraWindows"></div><p class="muted" data-i18n="historyNote">任務是歷史更新紀錄，並非即時執行狀態。</p><p class="muted" data-i18n="metricsNote">Mac 硬體每 5 秒採樣；畫面依更新頻率讀取。RAM 為排除檔案快取的估算值，記憶體壓力取自 macOS。</p><p class="muted">Deck Watch 0.3.0</p></dialog>
+<dialog id="tasksDialog"><div class="section-top"><h2 data-i18n="history">任務更新紀錄</h2><button id="closeTasks" class="icon-button" data-label="close"><svg aria-hidden="true"
+  class="lucide lucide-x"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.65"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M18 6 6 18" />
+  <path d="m6 6 12 12" />
+</svg></button></div><p class="muted" data-i18n="historyNote">任務是歷史更新紀錄，並非即時執行狀態。</p><ol id="allTaskList" class="task-list"></ol></dialog></main></body></html>
