@@ -8,7 +8,7 @@ import tarfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = '0.4.0'
+VERSION = '0.5.0'
 
 def replace_once(text, source, destination):
     if text.count(source) != 1:
