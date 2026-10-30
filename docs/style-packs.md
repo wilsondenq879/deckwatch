@@ -1,6 +1,6 @@
 # Community style packs
 
-![Appearance studio with three interfaces and three clock faces](appearance-studio.jpg)
+![Appearance studio with three interfaces and four clock faces](appearance-studio.jpg)
 
 Open Settings → Appearance studio. Choose an interface and a clock independently:
 
