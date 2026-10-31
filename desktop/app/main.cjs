@@ -57,7 +57,7 @@ else {
     if (process.argv.includes('--diagnostics')) setTimeout(async()=>{
       try {
         const report=await contents.executeJavaScript(`(() => ({
-          version: '0.5.1', viewport: [innerWidth,innerHeight],
+          version: '0.5.2', viewport: [innerWidth,innerHeight],
           clockFace: document.documentElement.dataset.clock,
           morseGroups: document.querySelectorAll('.live-morse .morse-code').length,
           morseSymbols: [...document.querySelectorAll('.live-morse .morse-code')].map(n=>n.dataset.code),
@@ -70,6 +70,11 @@ else {
           cpu: document.getElementById('cpuValue').textContent,
           ram: document.getElementById('ramValue').textContent,
           pressure: document.getElementById('memoryPressure').textContent,
+          ramSamples: Number(document.getElementById('ramChart').dataset.samples || 0),
+          ramChartVisible: document.getElementById('ramChart').getBoundingClientRect().height >= 16,
+          remainingPercent: document.getElementById('usageTrack').getAttribute('aria-valuenow'),
+          quotaLabel: document.getElementById('usageTrack').getAttribute('aria-label'),
+          quotaFill: document.getElementById('usagePanel').style.getPropertyValue('--progress'),
           overflow: document.documentElement.scrollWidth > innerWidth,
           verticalOverflow: document.documentElement.scrollHeight > innerHeight,
           quotaVisible: document.getElementById('usagePanel').getBoundingClientRect().bottom <= innerHeight,
