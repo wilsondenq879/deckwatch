@@ -34,6 +34,7 @@ class MacMetrics:
     def __init__(self):
         self.previous = None
         self.history = []
+        self.memory_history = []
         self.lib = None
         if sys.platform == 'darwin':
             self.lib = ctypes.CDLL('/usr/lib/libSystem.B.dylib')
@@ -72,6 +73,11 @@ class MacMetrics:
             value['memory'] = memory_from_vm(command('/usr/bin/vm_stat'), total)
         except Exception:
             value['errors'].append('memory')
+        memory = value['memory']
+        if memory and memory['totalBytes'] > 0:
+            percent = max(0, min(100, memory['usedBytes'] / memory['totalBytes'] * 100))
+            self.memory_history = (self.memory_history + [{'at': value['updatedAt'], 'value': round(percent, 2)}])[-24:]
+        value['memoryHistory'] = list(self.memory_history)
         try:
             level = int(command('/usr/sbin/sysctl', '-n', 'kern.memorystatus_vm_pressure_level'))
             value['memoryPressure'] = {1: 'normal', 2: 'warning', 4: 'critical'}.get(level)

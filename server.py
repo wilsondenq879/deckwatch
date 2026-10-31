@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parent
 LOG = logging.getLogger('deck-watch')
 ALLOWED_METHODS = {'initialize', 'account/rateLimits/read', 'thread/list'}
 SOURCES = ['cli', 'vscode', 'exec', 'appServer', 'unknown']
-VERSION = '0.4.0'
+VERSION = '0.5.2'
 
 
 def load_configuration(path):

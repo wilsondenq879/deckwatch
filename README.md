@@ -27,6 +27,8 @@ and [Amber Terminal example](themes/amber-terminal.json).
 
 `working` is shown only when the source reports active work or a local process is present. Recent Codex tasks remain historical updates, not a claim that a task is currently running or finished.
 
+The hardware panel shows CPU and RAM trends from the last two minutes (sampled every five seconds). The allowance bar shows **remaining** capacity: it shrinks as usage grows, turns amber at 40% remaining, and red at 20%.
+
 ## Architecture
 
 ```text

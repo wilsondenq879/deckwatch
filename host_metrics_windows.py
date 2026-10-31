@@ -24,6 +24,7 @@ class WindowsMetrics:
     def __init__(self):
         self.previous = None
         self.history = []
+        self.memory_history = []
         self.kernel32 = ctypes.windll.kernel32
 
     def sample(self):
@@ -56,6 +57,11 @@ class WindowsMetrics:
                                'estimated': False}
         except Exception:
             value['errors'].append('memory')
+        memory = value['memory']
+        if memory and memory['totalBytes'] > 0:
+            percent = max(0, min(100, memory['usedBytes'] / memory['totalBytes'] * 100))
+            self.memory_history = (self.memory_history + [{'at': value['updatedAt'], 'value': round(percent, 2)}])[-24:]
+        value['memoryHistory'] = list(self.memory_history)
         return value
 
     def run(self, collector):
