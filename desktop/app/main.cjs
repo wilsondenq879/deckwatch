@@ -15,6 +15,8 @@ else {
   app.whenReady().then(async()=>{
     bridge = new Bridge(app.getPath('userData'));
     const types={'/':'text/html','/index.html':'text/html','/app.js':'text/javascript','/desktop.js':'text/javascript','/app.css':'text/css','/desktop.css':'text/css','/favicon.svg':'image/svg+xml','/logo.png':'image/png'};
+    types['/controller.js']='text/javascript';
+    types['/controller.css']='text/css';
     types['/style-packs.js']='text/javascript';
     types['/style-packs.css']='text/css';
     protocol.handle('deck',async request=>{
@@ -49,7 +51,6 @@ else {
     contents.on('before-input-event',(event,input)=>{
       if(input.type!=='keyDown') return;
       if(input.key==='F11') {event.preventDefault();window.setFullScreen(!window.isFullScreen());}
-      if(input.key==='Escape' && window.isFullScreen()) {event.preventDefault();window.setFullScreen(false);}
     });
     window.once('ready-to-show',()=>window.show());
     await window.loadURL('deck://watch/');
@@ -57,12 +58,16 @@ else {
     if (process.argv.includes('--diagnostics')) setTimeout(async()=>{
       try {
         const report=await contents.executeJavaScript(`(() => ({
-          version: '0.5.2', viewport: [innerWidth,innerHeight],
+          version: '0.5.3', viewport: [innerWidth,innerHeight],
           clockFace: document.documentElement.dataset.clock,
           morseGroups: document.querySelectorAll('.live-morse .morse-code').length,
           morseSymbols: [...document.querySelectorAll('.live-morse .morse-code')].map(n=>n.dataset.code),
           clockTime: document.getElementById('clock').textContent,
           appearanceReady: !!document.getElementById('styleStudio'),
+          controllerReady: !!document.getElementById('controllerHints'),
+          gamepadApi: typeof navigator.getGamepads === 'function',
+          secureContext: isSecureContext,
+          gamepads: [...(navigator.getGamepads?.() || [])].filter(Boolean).map(p=>({id:p.id,mapping:p.mapping,buttons:p.buttons.length,axes:p.axes.length})),
           dashboardVisible: !document.getElementById('dashboard').hidden,
           settingsHidden: document.getElementById('settingsPage').hidden,
           taskRows: document.querySelectorAll('#taskList .task-row').length,
