@@ -1,0 +1,16 @@
+/* The hint rail takes its own space; it never covers quota or dialog actions. */
+.controller-hints{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:8px 20px;flex:none;padding:3px 5px 0;color:var(--muted);font-size:12px;line-height:22px}
+.controller-hints span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.controller-hints kbd{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 4px;border:1px solid var(--line);border-radius:6px;font:600 12px/1 ui-monospace,monospace;color:var(--fg);background:var(--skin-surface,#10151e)}
+.controller-mode [data-controller-focus]{outline:3px solid var(--cyan)!important;outline-offset:3px;box-shadow:0 0 0 6px color-mix(in srgb,var(--cyan) 13%,transparent);scroll-margin:12px}
+.controller-mode dialog{scroll-padding:14px}
+.controller-mode #settingsPage{scroll-padding:14px}
+.controller-mode #allTaskList .task-row{cursor:default}
+@media(min-width:900px) and (min-height:680px){.controller-mode .shell{gap:10px}.controller-mode .controller-hints{min-height:26px}}
+@media(max-width:899px){.controller-hints{justify-content:center;margin-top:12px}}
+@media(prefers-reduced-motion:reduce){.controller-mode [data-controller-focus]{scroll-behavior:auto}}
+
+.style-dialog .style-card:disabled{opacity:1;cursor:default}
+
+.controller-mode dialog{scroll-padding-bottom:72px}
+.controller-mode dialog .controller-hints{position:sticky;bottom:0;justify-content:center;gap:6px 14px;margin-top:16px;padding:10px 0 0;border-top:1px solid var(--line);background:var(--skin-surface,#0a1018);font-size:11px}

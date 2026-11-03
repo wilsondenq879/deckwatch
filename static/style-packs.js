@@ -44,7 +44,7 @@ $('settingsPage').prepend(section);
 const input=el('input');input.type='file';input.accept='.json,application/json';input.hidden=true;section.append(input);
 const dialog=el('dialog','style-dialog'),dialogTitle=el('h2'),preview=el('div'),json=el('textarea'),dialogActions=el('div','style-actions'),dialogStatus=el('p','setting-status');
 json.readOnly=true;json.rows=12;json.setAttribute('aria-label','Style pack JSON');dialogStatus.setAttribute('role','status');dialog.append(dialogTitle,preview,json,dialogActions,dialogStatus);document.body.append(dialog);
-function button(text,fn){const b=el('button','',text);b.type='button';b.addEventListener('click',fn);return b;}
+function button(text,fn){const b=el('button','',text);b.type='button';b.dataset.controllerKey='action-'+text;b.addEventListener('click',fn);return b;}
 function paint(node,p){for(const [k,v]of Object.entries(p.palette))node.style.setProperty('--skin-'+k,v);node.dataset.skin=p.layout;}
 function commit(next){try{const buttons=[...section.querySelectorAll('button')],index=buttons.indexOf(document.activeElement);localStorage.setItem(KEY,JSON.stringify(next));state=next;apply();render();if(index>=0)section.querySelectorAll('button')[index]?.focus();status.textContent=t('saved');return true;}catch{status.textContent=t('storage');return false;}}
 function face(type,time='10:42'){
@@ -54,11 +54,11 @@ function face(type,time='10:42'){
  else for(const part of time.split(':'))n.append(el('span','face-tile',part));
  return n;
 }
-function themeCard(pack,onClick){const b=button('',onClick);b.className='style-card';paint(b,pack);const demo=el('span','theme-sample');demo.append(el('span','theme-time','10:42'),el('span','theme-lines','━━  ━━━━━\n━━  ━━━'));b.append(demo,el('strong','',pack.name),el('small','',t('by')+pack.author));b.setAttribute('aria-pressed',String(JSON.stringify(state.pack)===JSON.stringify(pack)));return b;}
+function themeCard(pack,onClick){const b=button('',onClick);b.className='style-card';b.dataset.controllerKey=`theme-${pack.author}-${pack.name}`;paint(b,pack);const demo=el('span','theme-sample');demo.append(el('span','theme-time','10:42'),el('span','theme-lines','━━  ━━━━━\n━━  ━━━'));b.append(demo,el('strong','',pack.name),el('small','',t('by')+pack.author));b.setAttribute('aria-pressed',String(JSON.stringify(state.pack)===JSON.stringify(pack)));return b;}
 function render(){
  heading.textContent=t('title');hint.textContent=t('hint');themeTitle.textContent=t('theme');clockTitle.textContent=t('clock');communityTitle.textContent=t('community');note.textContent=t('note');
  themeGrid.replaceChildren(...[...presets,...state.custom].map(p=>themeCard(p,()=>commit({...state,pack:p}))));
- clockGrid.replaceChildren(...clocks.map(c=>{const b=button('',()=>commit({...state,clock:c}));b.className='clock-card';b.append(face(c),el('strong','',t(c)));b.setAttribute('aria-pressed',String(state.clock===c));return b;}));
+ clockGrid.replaceChildren(...clocks.map(c=>{const b=button('',()=>commit({...state,clock:c}));b.className='clock-card';b.dataset.controllerKey=`clock-${c}`;b.append(face(c),el('strong','',t(c)));b.setAttribute('aria-pressed',String(state.clock===c));return b;}));
  actions.replaceChildren(button(t('import'),()=>input.click()),button(t('export'),exportPack),button(t('reset'),()=>commit({...state,pack:presets[0],clock:'digital'})));
  if(state.custom.length)actions.append(button(t('remove'),()=>commit({pack:presets[0],clock:state.clock,custom:[]})));
 }
@@ -85,7 +85,7 @@ function apply(){paint(root,state.pack);root.dataset.clock=state.clock;updateClo
 new MutationObserver(updateClock).observe($('clockSeconds'),{childList:true});
 new MutationObserver(()=>{render();status.textContent='';}).observe(root,{attributes:true,attributeFilter:['lang']});
 function openPreview(pack){
- candidate=pack;dialogTitle.textContent=t('preview');preview.replaceChildren(themeCard(pack,()=>{}),face(pack.clock));json.hidden=true;dialogStatus.textContent='';
+ candidate=pack;dialogTitle.textContent=t('preview');const sample=themeCard(pack,()=>{});sample.disabled=true;sample.removeAttribute('aria-pressed');preview.replaceChildren(sample,face(pack.clock));json.hidden=true;dialogStatus.textContent='';
  dialogActions.replaceChildren(button(t('apply'),()=>{
  const custom=state.custom.filter(p=>!(p.name===candidate.name&&p.author===candidate.author));
  if(custom.length>=12){dialogStatus.textContent=t('full');return;}
