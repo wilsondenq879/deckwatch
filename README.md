@@ -16,6 +16,12 @@ Preview and import community JSON packs, export your current combination, and
 keep up to 12 custom styles on your device. See the [style pack guide](docs/style-packs.md)
 and [Amber Terminal example](themes/amber-terminal.json).
 
+## Steam Deck controls
+
+Navigate with the left stick or D-pad, press **A** to select/apply and **B** to go back. **X** opens Settings, **Y** opens Tasks, and the right stick scrolls. The footer shows available controls when using a controller. See the [controller setup](desktop/README.md#controller-navigation).
+
+![Controller navigation walkthrough](docs/deck-watch-controls.gif)
+
 ## What it monitors
 
 | Runtime | Read-only signal | Notes |

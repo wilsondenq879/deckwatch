@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parent
 LOG = logging.getLogger('deck-watch')
 ALLOWED_METHODS = {'initialize', 'account/rateLimits/read', 'thread/list'}
 SOURCES = ['cli', 'vscode', 'exec', 'appServer', 'unknown']
-VERSION = '0.5.2'
+VERSION = '0.5.3'
 
 
 def load_configuration(path):
@@ -438,7 +438,9 @@ def handler_class(collector, pairing, bind, port, node_key=None):
                 return self.send(200, collector.node_snapshot())
             if path == '/healthz':
                 return self.send(200, {'service': 'deck-watch', 'version': VERSION})
-            files = {'/': ('index.html', 'text/html; charset=utf-8'),
+            files = {'/controller.js': ('controller.js', 'text/javascript; charset=utf-8'),
+                     '/controller.css': ('controller.css', 'text/css; charset=utf-8'),
+                     '/': ('index.html', 'text/html; charset=utf-8'),
                      '/app.js': ('app.js', 'text/javascript; charset=utf-8'),
                      '/style-packs.js': ('style-packs.js', 'text/javascript; charset=utf-8'),
                      '/style-packs.css': ('style-packs.css', 'text/css; charset=utf-8'),
