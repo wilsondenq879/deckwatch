@@ -16,7 +16,23 @@ On first launch enter the Hub's LAN address, for example `http://192.168.1.2:876
 
 ## Add it to Steam
 
-In Desktop Mode, Steam → **Add a Non-Steam Game** → select **Deck Watch**. If it is not listed, browse to `~/.local/bin/deck-watch`. Do not enable Proton. The default controller layout can be Mouse + Trackpad; touch also works.
+In Desktop Mode, Steam → **Add a Non-Steam Game** → select **Deck Watch**. If it is not listed, browse to `~/.local/bin/deck-watch`. Do not enable Proton. Use Steam’s **Gamepad with Joystick Trackpad** template (or a standard Gamepad template) for controller navigation; touch and mouse also work.
+
+## Controller navigation
+
+| Input | Action |
+| --- | --- |
+| Left stick / D-pad | Move focus; hold to repeat |
+| A | Select the focused control, including Apply, Back and toggles |
+| B | Close the top dialog, then return from Settings |
+| X / Menu | Open Settings |
+| Y / View | Open task history |
+| Right stick | Scroll the current pane |
+| LB / RB | Scroll one page up / down |
+
+Focus stays inside an open dialog and returns to its previous control on close. Arrow keys/WASD, Enter, Escape and Page Up/Down provide the same navigation when Steam Input sends keyboard bindings. For text fields, use **STEAM + X** to open the Steam keyboard; B leaves text editing before returning. F11 toggles fullscreen.
+
+Button indexes follow the [W3C standard Gamepad mapping](https://www.w3.org/TR/gamepad/#remapping). Steam Input can emit either [gamepad or keyboard bindings](https://partner.steamgames.com/doc/features/steam_controller/legacy_mode).
 
 ## Privacy and offline behaviour
 
